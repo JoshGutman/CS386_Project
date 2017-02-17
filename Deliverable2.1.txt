@@ -1,3 +1,12 @@
+Group 4: Trading Card Game (TCG) Manager
+Tanner Brelje, Joshua Gutman, Shannon Washburn, Keith Lara, Justin Shaner
+Deliverable 2.1. | https://github.com/JoshGutman/CS386_Project/
+CS-386 Software Engineering | Spring 2017
+Professor Marco Gerosa
+
+
+
+
 TCG Manager
 Vision
 
