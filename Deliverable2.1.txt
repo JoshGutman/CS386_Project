@@ -2,7 +2,7 @@ TCG Manager
 Vision
 
 Introduction
-  A common problem for a lot of players of trading card games is a lack of efficiency in organizing their collection. Since most games involve collecting a large amount of physical cards or figures, 
+ A common problem for a lot of players of trading card games is a lack of efficiency in organizing their collection. Since most games involve collecting a large amount of physical cards or figures,  managing a large collection is often messy, and either takes hours of dedication to sort, or  involves hastily throwing items into random containers. In order to remedy this issue, we present the TCG Manager. This software is designed to aids the issues of card collection, by allowing users to catalog their collections in an easy to navigate manager. This manager will also include in depth searching features, price checking, and much more. In the end. the software will make the process of sorting cards easier and less time consuming, allowing more time for playing with friends. 
 
 
 Positioning
