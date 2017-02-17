@@ -1,0 +1,97 @@
+TCG Manager
+Vision
+
+Introduction
+  A common problem for a lot of players of trading card games is a lack of efficiency in organizing their collection. Since most games involve collecting a large amount of physical cards or figures, 
+
+
+Positioning
+  Problem Statement
+    The problem of inefficient organization of trading cards and figurines affects most players of trading card games the impact of which is loss of money, loss of time, inconvenience. a successful solution would be a program that aids in cataloging, managing and price checking cards in a collection.
+
+
+  Product Position Statement
+    For owners of TCGs who have lots of cards, the TCG Manager is a virtual card organizer that makes it quick and easy to organize and find relevant cards. Unlike binders, shoe boxes, and even other virtual card organizers, our product keeps your cards organized and makes finding new cards easy.
+
+
+Stakeholder Descriptions
+  Stakeholder Summary
+  
+    Sponsor
+      Publishers of large TCGs, such as Wizards of the Coast, who own Magic: The Gathering and Pokemon Trading Card Game
+        This stakeholder can provide funding for the project, as it is in their best interest to have a widely-used and unified virtual platform for the management of their product.  They can also provide widespread advertising and distribution.  Furthermore, they can integrate their websites, API, and forums directly into the product.
+  
+    Project Team
+      The five members of project group 4
+        Because our product and team are relatively small, we have no need for project managers.  Instead, we will be in charge of both the management and programming.  
+
+
+User Environment
+  Organizing a deck of cards from a TCG only involves a single person, and it can take them anywhere from a few minutes to a few hours depending on how many cards they have, how they are organizing them, and which specific games they are using.  Our product will need to be used on a computer or smart phone, although we plan to program it using Java, a highly portable language that can run on nearly any machine.  This ensures that the product can be used by a wide demographic.  The fact that every TCG player needs to organize their cards in some way, and our highly portable design gives it potential to be used by a large portion of the TCG community.
+
+
+Product Overview
+
+  Card Database
+    Priority 1
+      Card database would hold the information for each card. This allow the use to search for their cards in order to catalog them.
+        Release: On release of the program.
+
+  In Depth Search Feature
+    Priority 1
+      Allows the user to search for cards not only by name, but by type, ID number, and other primary features.
+        Release: On release of the program.
+
+  Collection Tracker
+    Priority 1
+      After a card is searched and found, the user adds it to the collection tracker. The user can also add the location, condition, and other specific features to the card.
+        Release: On release of the program.
+
+  Deck Builder
+    Priority 2
+      Feature would allow the user to construct hypothetical decks using either the cards they own or cards they wish to own in the future.
+        Release: First update to the program.
+
+  Price Checker
+    Priority 3
+      Would allow the user to check the average sale price of a card they own, or find retailers where the card is available.
+        Release: First/second update to the program.
+
+  Related Cards
+    Priority 4
+      This feature would recommend cards to a player that synergize with the card they are currently viewing. This is useful in deck building.
+        Release: Second update to the program.
+
+
+Other Product Requirements
+  
+  Run on nearly any machine by using Java
+    Priority 2
+      Release: Initial release
+
+  Responsive and intuitive front-end UI
+    Priority 1
+      Release: first / second update
+
+  GUI
+    Priority 2
+      Release: first / second update
+
+  Low resource usage
+    priority 3
+      Release: -
+
+
+
+
+Group contribution:
+  Tanner Brelje
+    1. Introduction
+    2.1 Product statement
+    4. Product overview
+
+  Josh Gutman:
+    2.2. Product position statement
+    3.1. Stakeholder summary
+    3.2. User environment
+    5. Other product requirements
