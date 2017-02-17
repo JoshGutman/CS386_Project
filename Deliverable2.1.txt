@@ -1,8 +1,13 @@
 TCG Manager
 Vision
 
+
+
+
 Introduction
  A common problem for a lot of players of trading card games is a lack of efficiency in organizing their collection. Since most games involve collecting a large amount of physical cards or figures,  managing a large collection is often messy, and either takes hours of dedication to sort, or  involves hastily throwing items into random containers. In order to remedy this issue, we present the TCG Manager. This software is designed to aids the issues of card collection, by allowing users to catalog their collections in an easy to navigate manager. This manager will also include in depth searching features, price checking, and much more. In the end. the software will make the process of sorting cards easier and less time consuming, allowing more time for playing with friends. 
+
+
 
 
 Positioning
@@ -10,8 +15,12 @@ Positioning
     The problem of inefficient organization of trading cards and figurines affects most players of trading card games the impact of which is loss of money, loss of time, inconvenience. a successful solution would be a program that aids in cataloging, managing and price checking cards in a collection.
 
 
+
+
   Product Position Statement
     For owners of TCGs who have lots of cards, the TCG Manager is a virtual card organizer that makes it quick and easy to organize and find relevant cards. Unlike binders, shoe boxes, and even other virtual card organizers, our product keeps your cards organized and makes finding new cards easy.
+
+
 
 
 Stakeholder Descriptions
@@ -26,8 +35,12 @@ Stakeholder Descriptions
         Because our product and team are relatively small, we have no need for project managers.  Instead, we will be in charge of both the management and programming.  
 
 
+
+
 User Environment
   Organizing a deck of cards from a TCG only involves a single person, and it can take them anywhere from a few minutes to a few hours depending on how many cards they have, how they are organizing them, and which specific games they are using.  Our product will need to be used on a computer or smart phone, although we plan to program it using Java, a highly portable language that can run on nearly any machine.  This ensures that the product can be used by a wide demographic.  The fact that every TCG player needs to organize their cards in some way, and our highly portable design gives it potential to be used by a large portion of the TCG community.
+
+
 
 
 Product Overview
@@ -63,6 +76,8 @@ Product Overview
         Release: Second update to the program.
 
 
+
+
 Other Product Requirements
   
   Run on nearly any machine by using Java
@@ -95,3 +110,12 @@ Group contribution:
     3.1. Stakeholder summary
     3.2. User environment
     5. Other product requirements
+    
+  Shannon Washburn:
+    None
+
+  Keith Lara:
+    None
+    
+  Justin Shaner:
+    None
