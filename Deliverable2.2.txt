@@ -1,0 +1,222 @@
+Group 4: Trading Card Game (TCG) Manager
+Tanner Brelje, Joshua Gutman, Shannon Washburn, Keith Lara, Justin Shaner
+Deliverable 2.2. | https://github.com/JoshGutman/CS386_Project/
+CS-386 Software Engineering | Spring 2017
+Professor Marco Gerosa
+
+
+
+Trading Card Game (TCG) Manager
+Use-case Specification: Collection Input					Date: 23/Feb/17
+
+Trading Card Game (TCG) Manager
+Use-Case: Collection Input
+
+1. Brief Description:
+This use case describes the actions taken by the user to input their collection into the manager. The actions taken will represent what the user must do to input one card; repetition of these actions will be done to catalog the entire collection.
+2. Actor Brief Descriptions:
+2.1 TCG Manager User
+3. Preconditions:
+Software must be open, on the main menu/ home page of the software.
+4. Basic Flow of Events:
+	1.  The use case begins when user clicks a button to begin adding cards, likely titled “Add Card” or something similar.
+	2. User is prompted with a form which asks for the details of the card, including game, name, condition. etc.
+	3. User inputs the required information, the database identifies the card and prompts the user if the card matches their own.
+	4. Once the user confirms the information, the card is cataloged and stored in the collection manager.
+	5. The use case ends.
+5. Alternative Flows:
+5.1 Exiting the Form
+	If in step 1-4 of the basic flow the user clicks on the x in the top right of the form, then
+	1. The program returns to the main menu, exiting out of the “Add Card” screen.
+	2. The use case resumes at step 1.
+5.2 Mis-Input of Information
+	If in step 4 of the basic flow the user realizes they’ve made a mistake, then the user clicks “No” when prompted if the information is correct. Then,
+	1. The program returns to the form, allowing the user to change information.
+	2. The use case resumes at step 2.
+6. Subflows:
+6.1 Form Submission
+	1. User is prompted with a form at step 2.
+	2. Form must include the game and name of card, but can range in information from there.
+	3. Other information in the form may or may not be verified.
+7. Key Scenarios:
+7.1 Add Cards
+	1. User clicks the “Add Card” option.
+	2. User fills out the form, submits.
+	3. Card is added to the database.
+8. Post-conditions:
+User is taken to a view of the collection, allowing them to verify their input was taken.
+9. Special Requirements:
+No real special requirements for this use case.
+
+
+
+
+
+Trading Card Game (TCG) Manager
+Use-case Specification: Creating New Deck					Date: 23/Feb/17
+
+Trading Card Game (TCG) Manager
+Use-Case: Creating New Deck
+
+1. Brief Description:
+This use-case describes the process to create a new deck for a TCG.
+2. Actor Brief Descriptions:
+2.1 TCG Manager User
+3. Preconditions:
+The user must have the TCG Manager program open.
+4. Basic Flow of Events:
+	1.  The use case begins when the user clicks on a button that says “New deck” or something similar.
+	2.  The user will then be prompted to enter the name of the deck, and the TCG they will be using. 
+	3.  The user will then add cards to their deck in a similar fashion to adding cards to a TCG.
+	4. When the user has entered all of the cards they want, they click a button that says “Save” or something similar.
+	5. The use case ends.
+5. Alternative Flows:
+5.1 Entering a wrong card
+	If in step 3 of the basic flow the user accidentally enters a card they don’t want, then
+	1. They click on the card and click a button that says “Remove” or something similar
+	2. The use case resumes at step 3
+6. Subflows:
+6.1 Form submission
+	1. At step 2, the user will have to submit a form .
+	2. The user will need to include the desired name of their deck and the TCG they will be using.
+7. Key Scenarios:
+7.1 Information about the new deck
+	1. The user must enter information about their new deck, including the name and TCG they will be using
+	2. The user submits the information and starts building the deck
+7.2 Adding Cards
+	1. The user clicks a button to add another card to the deck
+	2. The user enters information about the card they want to add
+	3. The program displays cards that match the information the user entered
+	4. The user chooses the card they want or searches for another card.  Repeat.
+8. Post-conditions:
+8.1 Reviewing the deck
+	The user can review the deck after they are done adding cards.  They can then choose to save the deck or continue editing it.
+9. Special Requirements:
+None
+
+
+
+
+Trading Card Game (TCG) Manager
+Use-case Specification: In Depth Search					Date: 23/Feb/17
+
+Trading Card Game (TCG) Manager
+Use-Case: In Depth Search
+
+1. Brief Description:
+This use case outlines the in depth search features planned for the TCG Manager. This search feature should go above and beyond a basic search bar, and should allow the user to find a card without knowing that card’s exact name.
+2. Actor Brief Descriptions:
+2.1 TCG Manager User
+3. Preconditions:
+The user must have the program open to the “View Collection” screen. This is where the search feature will be located.
+4. Basic Flow of Events:
+	1.  The use case begins when user enables the search feature, likely by hitting a button labelled “Search.”
+	2. User will be prompted with a form with multiple boxes and options contained within it.
+	3. User can fill the form as much or as little as they choose.
+	4. User submits the form to the program.
+	5. The program searches the database based on the information given in the form, and populates a list of cards.
+	6. This list augments the current view of the collection until the search is cleared.
+5. Alternative Flows:
+5.1 Clear Form
+	If in step 3 of the basic flow the user hits the “clear search” option, then
+	1. The form is cleared of all information.
+	2. The use case resumes at step 2.
+5.2 Exit Search
+	If in step 2-5 of the basic flow the user closes out of the form, then
+1. The form is cleared and removed from the screen.
+	2. The use case resumes at step 1.
+6. Subflows:
+6.1 Form Submission
+	1. In step 4, the form that the user fills out is submitted
+	2. The form is read in by the program, each detail is factored into the search.
+	3. The results of the search could range depending on how many cards match the terms.
+7. Key Scenarios:
+7.1 Searching Own Collection
+	1. User opens the search feature.
+	2. After filling out the form, the user can switch the view to show either the cards they do have, or the cards they do not have.
+8. Post-conditions:
+8.1 Collection View
+	After the search is done, the user is shown the results of their search based on the form.
+9. Special Requirements:
+None
+
+
+
+
+
+
+Trading Card Game (TCG) Manager
+Use-case Specification: Remove Card					Date: 23/Feb/17
+
+Trading Card Game (TCG) Manager
+Use-Case: Remove Card
+
+1. Brief Description:
+The following describes the user case involved with removing a card from the collection.
+2. Actor Brief Descriptions:
+2.1 TCG Manager User
+3. Preconditions:
+The program must be open to the “Collection View” screen.
+4. Basic Flow of Events:
+	1.  The use case begins when user locates the card they want to remove in the collection.
+	2. This could be accomplished by scrolling through the collection or using the search feature.
+	3. The user clicks the remove button on the card listing.
+	4. If the user owns more than one of the card, the user is prompted with a form.
+	5. The user fills out how many cards they want to remove in the form.
+	6. The user submits the form, removing that many cards.
+	7. The use case ends.
+5. Alternative Flows:
+5.1 Close Form
+	If in step 5 of the basic flow the closes the form, then
+	1. The form closes and returns to the collection view.
+	2. The use case resumes at step 1
+6. Subflows:
+6.1 Form Submission
+	1. In step 4, the form that the user fills out is submitted
+	2. The form is read in by the program, amount is factored into the removal.
+7. Key Scenarios:
+7.1 Remove Card
+	1. The user finds the card they want to remove.
+	2. Uses the removal function to take the card out of the system.
+8. Post-conditions:
+8.1 The user is returned to the “View Collection” screen.
+9. Special Requirements:
+None
+
+
+
+
+
+Trading Card Game (TCG) Manager
+Use-case Specification: Delete Deck					Date: 23/Feb/17
+
+Trading Card Game (TCG) Manager
+Use-Case: Delete Deck
+
+1. Brief Description:
+The following is a description of the use case that deletes a stored deck.
+2. Actor Brief Descriptions:
+2.1 TCG Manager User
+3. Preconditions:
+The user’s decklist must be open in order to make changes.
+4. Basic Flow of Events:
+	1.  The use case begins when user clicks the “Delete Deck” option.
+	2. The user is prompted if they’re sure they want to delete the deck.
+	4. The deck is deleted.
+	5. The use case ends.
+5. Alternative Flows:
+5.1 Delete Deck, No
+	If in step 2 of the basic flow the user clicks “No”, then
+	1. The deck is not deleted.
+	2. The use case resumes at step 1.
+6. Subflows:
+6.1 None
+7. Key Scenarios:
+7.1 Delete Deck
+	1. The user locates the deck they want to remove.
+	2. Clicks the delete deck option.
+	3. Confirms the choice.
+8. Post-conditions:
+8.1 User is returned to the decklist screen.
+9. Special Requirements:
+None

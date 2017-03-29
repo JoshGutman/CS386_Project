@@ -1,0 +1,97 @@
+Group 4: Trading Card Game (TCG) Manager
+Tanner Brelje, Joshua Gutman, Shannon Washburn, Keith Lara, Justin Shaner
+Deliverable 1.2. | https://github.com/JoshGutman/CS386_Project/
+CS-386 Software Engineering | Spring 2017
+Professor Marco Gerosa
+
+
+
+
+Questions:
+1. Do you currently own more than one TCG? How many?
+2. If so, would you say that you own a lot of cards for the games you have?
+3. How are you currently storing/organizing your card collection?
+4. What are some challenges you face in organizing your physical collection?
+5. Do you use a virtual card manager, such as tappedout.net?
+6. If so, could you tell me more about it? What features do you like, what features don't you like, what features do you wish it had?
+7. Do you spend a lot of time organizing your cards?
+8. How do you find more cards or get specific cards for your collection?
+9. Do you go on multiple different websites when you are looking for new cards?
+10. What’s your favorite thing about TCGs?
+11. What’s your least favorite thing about TCGs?
+
+
+
+
+Interviewee #1:
+1. He owns 1 TCG -- Yugioh
+2. He said he had a lot of cards.  From the looks of it, he had hundreds with him.
+3. He uses a binder with plastic sleeves for each card
+4. He has a hard time keeping all of his cards organized, especially with the binder.  He made a point of saying that he basically doesn’t organize the cards that he’s not currently using at all.
+5. He’s heard of tappedout, but he’s never used it, nor any other virtual card manager
+6. We asked him what features he would like to see if he were to use a virtual card manager.  He said that he would like to see related or linked cards when he is viewing a card.  He also would like to see links to forum posts or discussions about strategies or decks involving that card.
+7. He said that he does spend a lot of time organizing cards, and sometimes he just doesn’t do it because it takes so long.
+8. He said that he gets new cards in three ways: trading them with fellow TCG players at certain places and times, like the comic book store we were at, buying them from stores, like Bookman’s, and finally buying them from websites.  He said that he tries to trade with people before resorting to buying them online, but he (and many other people according to him) usually end up using the internet.
+9. He said that he usually will visit two or three websites when looking for a card, usually to compare and find the best prices.  I asked him a follow up question: “Would you find it useful to be able to view prices for a card from multiple different websites in a single place?” to which he responded yes.
+10. His favorite thing about TCGs is the community aspect -- hanging out with friends and people with similar interests, enjoying the social aspect of the game.
+11. His least favorite thing is how hard it is to keep up with the changing meta of the games.  He also mentioned how hard it is to stay organized.
+
+
+
+
+Interviewee #2:
+1. He has played 3 TCGs -- Yugioh, Card Wars, Star Wars Miniatures
+2. He said he owns quite a lot of cards for Yugioh, not as many for the others.
+3. He admits that they’re all in a shoebox, with no organization whatsoever.
+4. He says he has trouble determining where to put “excess” cards, like commons or unneeded cards.
+5. He had never heard of tappedout.net.
+6. He he was to use an online sorting program, he would like to see organization by archetype, similarly to the man above. He would also enjoy seeing in depth search features.
+7. He only organizes his when he feels compelled to do so, and doing so takes up to an hour.
+8. In order to purchase cards generally, he  purchases packs or boosters; to get specific cards, he uses tcgplayer.com.
+9. He only uses the one site when looking for cards.
+10. He likes card games because the landscape of the game always changes.
+11. He does not like “getting his ass beat.”
+
+
+
+
+Interviewee #3:
+1. Plays Yugioh, owns Pokemon and Magic as well.
+2. Compared to others that are really into the game, he owns an average amount.
+3. Uses a trade binder for rare cards, but his unpopular cards go to tins.
+4. Too much physically to work with, can be overwhelming. It’s also hard to judge what the cards should be organized by.
+5. DevPro, YuGo Builder
+6. Price ranges were nice, also appreciates knowing the tournament status, rarity, set of the card. When approached about archetype idea mentioned in other interviews: the idea would be very useful.
+7. Not really, but he used to however. He would spend a couple hours every month, but now has a simple, yet less organized solution (as discussed in q3).
+8. Generally bought packs, learned it wasn't the best way to go.Special offer boxes were deemed worthwhile, as he knew what he could get. Used those rare cards for trading when he didn’t need them. For the most part, uses online sources; tcgplayer, ebay less so to get individual cards..
+9. Yes ^
+10. Appreciates being able to battle people in person, sometimes online is nice, but he enjoys the personal experience.
+11. It’s a double edge sword, as it’s good to learn in person, but it leaves you open to people who are willing to take advantage of you.
+
+
+
+
+Interviewee #4:
+1. I currently own cards from Cardfight Vanguard, Pokemon, and Card Wars.
+2. I feel like I do own quite a bit of the cards from the TCGs I play. Although after being out of the loop for a while now the collection is not as vast as it could be.
+3. I use deck boxes, card binders, and storage cases to organize my collection.
+4. There are way too many crappy commons that take up too much space.
+5. No I do not use any virtual card managers.
+6. N/A
+7. I used to spend a good amount of time organizing my cards.
+8. I either purchase more packs/boxes or buy singles online from websites like ideal808.com.
+9. I primarily use ideal808.com however eBay and amiami.com
+10. I really enjoyed the strategy or sometimes no strategy when it came to playing. It was also fun to absolutely destroy someone by just screwing around or getting ridiculously lucky. The time it took to build a deck tailored specifically to your own play style made for an enjoyable experience.
+11. Getting wrecked by someone with insane amounts of luck. The people too were a random toss up. The odds of running into an asshole in cards games is about 70% of the time. 
+
+
+
+
+Group Participation:
+
+Tanner Brelje: Assisted Joshua Gutman in the initial interview. Interview took place at the local comics shop, Cab Comics. Proceeded to do two additional interviews over Discord chat service. Helped format the document.
+
+Joshua Gutman: Came up with a few questions to ask. Interviewed one TCG player at Cab Comics and recorded his answers.
+
+Shannon Washburn: Interviewed a TCG player, contributed questions to the group's pool.
+
