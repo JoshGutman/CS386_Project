@@ -1,9 +1,11 @@
 package Frames;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Collection {
+public class Collection implements Serializable {
 	
+	private static final long serialVersionUID = -1006038138527537901L;
 	private String name;
 	private Game game;
 	public ArrayList<Card> cards;
