@@ -20,6 +20,8 @@ class MainWindow(tk.Frame):
                 self.collections.append(pickle.load(f))
             except EOFError:
                 break
+
+        self.references = {}
             
 
         # This is the method that creates all the buttons, labels, etc.
@@ -27,8 +29,6 @@ class MainWindow(tk.Frame):
 
 
     def create_widgets(self):
-
-        current_width = self.master.winfo_width()
 
         # Top bar frame, including "TCG Manager" title and "New Collection" button
         top_bar = tk.Frame(self.master)
@@ -42,15 +42,24 @@ class MainWindow(tk.Frame):
         new_collection_button = tk.Button(top_bar, height=2, text="New collection", command=self.add_collection)
         new_collection_button.pack(side="right")
 
+        self.search_result_frame = tk.Frame(self.master)
+        search_frame = tk.Frame(self.master)
+        search_label = tk.Label(search_frame, height=2, text="Search:")
+        search_label.pack(side="left")
+        self.search = tk.Entry(search_frame)
+        self.search.bind("<Key>", self.display_search)
+        self.search.pack(side="right")
+        search_frame.pack()
+
         # Collection frame that holds all the colleciton buttons
         self.collection_frame = tk.Frame(self.master)
         self.collection_frame.config(pady=5)
         self.collection_frame.pack()
 
         # Create buttons for all the collections stored in "collections.txt"
-        self.collection_buttons = []
         for collection in self.collections:
-            self.add_collection_button(collection)
+            self.add_collection_button(collection, self.collection_frame)
+        
 
 
 
@@ -79,6 +88,7 @@ class MainWindow(tk.Frame):
         game_field = tk.Entry(game_frame)
         game_field.pack(side="right")
 
+
         # Adds creates new Collection from values in textfields, pickles it, and
         # adds it to self.collections.
         def _create_new_collection():
@@ -90,7 +100,7 @@ class MainWindow(tk.Frame):
                 pickle.dump(c, f)
             f.close()
 
-            self.add_collection_button(collection)
+            self.add_collection_button(collection, self.collection_frame)
             new_window.destroy()
 
         # Frame and buttons for confirming the creation of new button or canceling
@@ -105,8 +115,8 @@ class MainWindow(tk.Frame):
 
 
 
-    def add_collection_button(self, collection):
-        new_frame = tk.Frame(self.collection_frame)
+    def add_collection_button(self, collection, frame):
+        new_frame = tk.Frame(frame)
         
         new_button = tk.Button(new_frame, text=collection.name, command=lambda:print("view placeholder"))
         new_button.config(height=2)
@@ -115,29 +125,61 @@ class MainWindow(tk.Frame):
         new_button.config(font=("Courier", 14))
         new_button.pack(side="left")
 
-        delete_button = tk.Button(new_frame, text="X", command=lambda x=collection:self.delete_collection_button(x))
+        delete_button = tk.Button(new_frame, text="X", command=lambda x=collection, y=new_frame:self.delete_collection_button(x,y))
         delete_button.config(height=2)
         delete_button.config(width=6)
         delete_button.config(font=("Courier", 14))
         delete_button.config(bg="light gray")
         delete_button.pack(side="right")
-        
-        self.collection_buttons.append(new_frame)
-        new_frame.pack()
+
+        new_frame.pack(fill="x")
+
+        self.references[new_frame] = collection
 
 
 
-    def delete_collection_button(self, collection):
+    
+    def delete_collection_button(self, collection, frame):
         index = self.collections.index(collection)
-        self.collection_buttons[index].pack_forget()
-        del self.collection_buttons[index]
+                    
+        frame.pack_forget()
+        del self.references[frame]
         del self.collections[index]
 
         f = open("collections.txt", "wb")
         for c in self.collections:
             pickle.dump(c, f)
         f.close()
+     
+
+
+
+    # This method is called when a key is entered in the search bar
+    def display_search(self, key):
         
+        # Construct search term
+        text = self.search.get().lower()
+        if ord(key.char) == 8 and len(text) >= 1:
+            text = text[0:len(text)-1]
+        elif ord(key.char) != 8:
+            text += key.char.lower()
+
+        # Display all collections that contain the search bar text
+        self.collection_frame.pack_forget()
+        self.collection_frame.destroy()
+        self.collection_frame = tk.Frame(self.master)
+        to_display = []
+        for collection in self.collections:
+            if collection.name.lower().startswith(text):
+                to_display.append(collection)
+                
+        for collection in to_display:
+            self.add_collection_button(collection, self.collection_frame)
+
+        self.collection_frame.pack()
+
+
+
 
 if __name__ == "__main__":
     root = tk.Tk()
