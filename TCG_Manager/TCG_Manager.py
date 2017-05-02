@@ -130,7 +130,7 @@ class MainWindow(tk.Frame):
         else:
             self.left.config(relief=tk.FLAT)
 
-        if len(self.to_add) <= self.page*9:
+        if len(to_add) <= self.page*9:
             self.right.config(relief=tk.FLAT)
         else:
             self.right.config(relief=tk.RAISED)
@@ -430,11 +430,12 @@ class MainWindow(tk.Frame):
 
 
     def save(self):
-        with open("collections.txt", "w") as f:
+        with open("collections.txt", "wb") as f:
             for c in self.collections:
                 try:
                     pickle.dump(c, f)
-                except:
+                except Exception as e:
+                    print(str(e))
                     continue
 
         
