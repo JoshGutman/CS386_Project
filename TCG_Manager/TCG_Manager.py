@@ -23,12 +23,16 @@ class MainWindow(tk.Frame):
                     break
         except FileNotFoundError:
             f = open("collections.txt", "w")
-            f.close()
+        f.close()
 
 
         self.references = {}
         self.page = 1
         self.current_display = self.collections
+
+        self.cards = self.get_cards()
+        self.cards_to_add = []
+        self.current_collection = None
             
 
         # This is the method that creates all the buttons, labels, etc.
@@ -49,6 +53,7 @@ class MainWindow(tk.Frame):
         new_collection_button = tk.Button(top_bar, height=2, text="New collection", command=self.add_collection)
         new_collection_button.pack(side="right")
 
+        # Search bar
         search_frame = tk.Frame(self.master)
         search_label = tk.Label(search_frame, height=2, text="Search:")
         search_label.pack(side="left")
@@ -163,10 +168,7 @@ class MainWindow(tk.Frame):
             collection = Collection(name_field.get(), Game(game_field.get()))
             self.collections.append(collection)
             
-            f = open("collections.txt", "wb")
-            for c in self.collections:
-                pickle.dump(c, f)
-            f.close()
+            self.save()
 
             if len(self.current_display) < 9:
                 self.add_collection_button(collection, self.collection_frame)
@@ -196,7 +198,7 @@ class MainWindow(tk.Frame):
         new_label.config(font=("Courier", 14))
         new_label.pack(side="left")
         
-        new_button = tk.Button(new_frame, text=collection.name, command=lambda:print("view placeholder"))
+        new_button = tk.Button(new_frame, text=collection.name, command=lambda x=collection: self.view_collection(x))
         new_button.config(height=2)
         new_button.config(width=75)
         new_button.config(bg="light gray")
@@ -228,10 +230,7 @@ class MainWindow(tk.Frame):
         index = self.current_display.index(collection)
         del self.current_display[index]
 
-        f = open("collections.txt", "wb")
-        for c in self.collections:
-            pickle.dump(c, f)
-        f.close()
+        self.save()
 
         
      
@@ -269,6 +268,185 @@ class MainWindow(tk.Frame):
         self.collection_frame.pack()
 
 
+
+
+    def view_collection(self, collection):
+        self.current_collection = collection
+        
+        # Create new window
+        self.collection_window = tk.Toplevel(self.master)
+        self.collection_window.geometry("1100x700")
+        self.collection_window.resizable(False, False)
+        self.collection_window.wm_title("{} -- {}".format(str(collection.game), collection.name))
+
+        # Top bar frame
+        top_bar = tk.Frame(self.collection_window, pady=5)
+        top_bar.pack(fill="x")
+
+        # Collection title label
+        title = tk.Label(top_bar, text=collection.name, font=("Courier", 20), padx=5)
+        title.pack(side="left")
+
+        # Add card button
+        add_card_button = tk.Button(top_bar, height=2, text="Add card", padx=5, command=lambda x=collection: self.add_cards(x))
+        add_card_button.pack(side="right")
+
+
+        self.card_frame = tk.Frame(self.collection_window, pady=5)
+
+        self.display_cards(collection.cards, False)
+
+
+
+
+    def get_cards(self):
+        cards = []
+        f = open("images\\names.txt", "r")
+        names = f.readlines()
+        f.close()
+
+        for i in range(101):
+            cards.append(Card(names[i], "Pokemon", "images\\{}.jpg".format(i)))
+        return cards
+
+
+
+    def display_cards(self, to_add, adding):
+        self.card_frame.pack_forget()
+        self.card_frame.destroy()
+        self.card_frame = tk.Frame(self.collection_window, pady=5)
+        self.card_frame.pack()
+
+        r = 0
+        c = 0
+        for card in to_add:
+            if r >= 3:
+                break
+            frame = tk.Frame(self.card_frame)
+            frame.grid(row=r, column=c)
+            button = tk.Button(frame, image=card.image, width=100, height=160, padx=2)
+            button.config(command=lambda x=adding, y=card, z=button: self.card_interact(x,y,z))
+            button.pack()
+            label = tk.Label(frame, text=card.name, font=("Courier", 10), width=11, height=1, pady=3)
+            label.pack()
+            
+            c += 1
+            if c%8 == 0:
+                c = 0
+                r += 1
+
+
+    def add_cards(self, collection):
+
+        self.card_frame.pack_forget()
+        self.card_frame.destroy()
+
+        # Search bar
+        self.search_frame_c = tk.Frame(self.collection_window)
+        search_label = tk.Label(self.search_frame_c, height=2, text="Search:")
+        search_label.pack(side="left")
+        self.search_c = tk.Entry(self.search_frame_c)
+        self.search_c.bind("<Key>", self.display_search_c)
+        self.search_c.pack(side="right")
+        self.search_frame_c.pack(side="top")
+
+        self.add_button = tk.Button(self.collection_window, text="Add", command=lambda x=collection: self.confirm_add(x))
+        self.add_button.pack(side="bottom")
+
+
+    def confirm_add(self, collection):
+        i = self.collections.index(collection)
+        for card in self.cards_to_add:
+            self.collections[i].cards.append(card)
+        self.cards_to_add = []
+
+        self.search_frame_c.pack_forget()
+        self.search_frame_c.destroy()
+        self.add_button.pack_forget()
+        self.add_button.destroy()        
+        self.display_cards(collection.cards, False)
+
+
+
+    def card_interact(self, adding, card, button):
+        if adding:
+            if card not in self.cards_to_add:
+                self.cards_to_add.append(card)
+                button.config(relief=tk.SUNKEN)
+            else:
+                i = self.cards_to_add.index(card)
+                del self.cards_to_add[i]
+                button.config(relief=tk.RAISED)
+
+        else:
+            self.card_zoom(card)
+
+
+    def card_zoom(self, card):
+        self.zoom = tk.Toplevel(self.card_frame)
+        self.zoom.geometry("421x650")
+
+        frame = tk.Frame(self.zoom)
+        frame.pack(fill="both")
+
+        image = tk.Label(frame, image=card.image_large)
+        image.pack()
+
+        remove_button = tk.Button(frame, text="Remove card", height=3, command=lambda x=card, y=self.current_collection: self.remove_card(x,y))
+        remove_button.pack(fill="both")
+
+
+    def remove_card(self, card, collection):
+        i = self.current_collection.cards.index(card)
+        del self.current_collection.cards[i]
+        self.zoom.destroy()
+        self.display_cards(self.current_collection.cards, False)
+            
+
+
+    def display_search_c(self, key):
+        
+        # Construct search term
+        text = self.search_c.get().lower()
+        if key.char == "":
+            pass
+        elif ord(key.char) == 8 and len(text) >= 1:
+            text = text[0:len(text)-1]
+        elif ord(key.char) != 8:
+            text += key.char.lower()
+            
+
+        # Display all collections that contain the search bar text
+        self.card_frame.pack_forget()
+        self.card_frame.destroy()
+        self.card_frame = tk.Frame(self.collection_window)
+        to_display = []
+        for card in self.cards:
+            if card.name.lower().startswith(text):
+                to_display.append(card)
+
+        self.display_cards(to_display, True)
+        self.card_frame.pack()
+
+
+    def save(self):
+        with open("collections.txt", "w") as f:
+            for c in self.collections:
+                try:
+                    pickle.dump(c, f)
+                except:
+                    continue
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
 
 
 if __name__ == "__main__":
