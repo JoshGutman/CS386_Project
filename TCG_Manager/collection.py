@@ -16,7 +16,7 @@ class Collection:
 
     def __eq__(self, x):
         assert type(x) == Collection
-        if self.name == x.name:
+        if self.name == x.name and self.game == x.game:
             return True
         else:
             return False

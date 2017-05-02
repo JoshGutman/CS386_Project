@@ -14,14 +14,21 @@ class MainWindow(tk.Frame):
 
         # Read collections from collections.txt
         self.collections = []
-        f = open("collections.txt", "rb")
-        while True:
-            try:
-                self.collections.append(pickle.load(f))
-            except EOFError:
-                break
+        try:
+            f = open("collections.txt", "rb")
+            while True:
+                try:
+                    self.collections.append(pickle.load(f))
+                except EOFError:
+                    break
+        except FileNotFoundError:
+            f = open("collections.txt", "w")
+            f.close()
+
 
         self.references = {}
+        self.page = 1
+        self.current_display = self.collections
             
 
         # This is the method that creates all the buttons, labels, etc.
@@ -31,18 +38,17 @@ class MainWindow(tk.Frame):
     def create_widgets(self):
 
         # Top bar frame, including "TCG Manager" title and "New Collection" button
-        top_bar = tk.Frame(self.master)
-        top_bar.pack(side="top")
+        top_bar = tk.Frame(self.master, padx=5, pady=5)
+        top_bar.pack(fill="x")
 
         # TCG Manager title label
         title = tk.Label(top_bar, text="TCG Manager", font=("courier", 20))
-        title.pack(side="left")
+        title.pack()
 
         # New collection button
         new_collection_button = tk.Button(top_bar, height=2, text="New collection", command=self.add_collection)
         new_collection_button.pack(side="right")
 
-        self.search_result_frame = tk.Frame(self.master)
         search_frame = tk.Frame(self.master)
         search_label = tk.Label(search_frame, height=2, text="Search:")
         search_label.pack(side="left")
@@ -51,16 +57,78 @@ class MainWindow(tk.Frame):
         self.search.pack(side="right")
         search_frame.pack()
 
+
         # Collection frame that holds all the colleciton buttons
         self.collection_frame = tk.Frame(self.master)
-        self.collection_frame.config(pady=5)
         self.collection_frame.pack()
 
+
         # Create buttons for all the collections stored in "collections.txt"
-        for collection in self.collections:
-            self.add_collection_button(collection, self.collection_frame)
+        if len(self.collections) <= 9:
+            for collection in self.collections:
+                self.add_collection_button(collection, self.collection_frame)
+        else:
+            self.change_page('x', self.collections)
+
+
+        arrow_frame = tk.Frame(self.master, pady=5)
+        arrow_frame.pack(side="bottom")
+        
+        self.left = tk.Button(arrow_frame, padx=5, height=2, width=5, text="<<", command=lambda:self.change_page('L', self.current_display))
+        self.left.config(relief=tk.FLAT)
+        
+        self.right = tk.Button(arrow_frame, padx=5, height=2, width=5, text=">>", command=lambda:self.change_page('R', self.current_display))
+        if len(self.collections) > 9:
+            self.right.config(relief=tk.RAISED)
+        else:
+            self.right.config(relief=tk.FLAT)
+
+        self.left.pack(side="left")
+        self.right.pack(side="right")
         
 
+
+    def change_page(self, direction, to_add):
+
+        if direction == 'L':
+            if self.page == 1:
+                return
+            self.page -= 1
+            
+        elif direction == 'R':
+            if len(to_add) % (self.page*9) == len(to_add):
+                return
+            self.page += 1
+
+
+        self.collection_frame.pack_forget()
+        self.collection_frame.destroy()
+        self.collection_frame = tk.Frame(self.master)
+        self.collection_frame.pack()
+
+        if direction == 'x':
+            for i in range(9):
+                if i >= len(to_add):
+                    break
+                self.add_collection_button(to_add[i], self.collection_frame)
+            return
+
+        
+        for i in range((self.page-1)*9, self.page*9):
+            if i >= len(to_add):
+                self.right.config(relief=tk.FLAT)
+                break
+            self.add_collection_button(to_add[i], self.collection_frame)
+
+        if self.page > 1:
+            self.left.config(relief=tk.RAISED)
+        else:
+            self.left.config(relief=tk.FLAT)
+
+        if len(self.to_add) <= self.page*9:
+            self.right.config(relief=tk.FLAT)
+        else:
+            self.right.config(relief=tk.RAISED)
 
 
 
@@ -100,9 +168,11 @@ class MainWindow(tk.Frame):
                 pickle.dump(c, f)
             f.close()
 
-            self.add_collection_button(collection, self.collection_frame)
+            if len(self.current_display) < 9:
+                self.add_collection_button(collection, self.collection_frame)
             new_window.destroy()
 
+        
         # Frame and buttons for confirming the creation of new button or canceling
         button_frame = tk.Frame(new_window, pady=10)
         button_frame.pack()
@@ -116,11 +186,19 @@ class MainWindow(tk.Frame):
 
 
     def add_collection_button(self, collection, frame):
+        
         new_frame = tk.Frame(frame)
+
+        new_label = tk.Label(new_frame, text=str(collection.game))
+        new_label.config(height=2)
+        new_label.config(width=15)
+        new_label.config(bg="light gray")
+        new_label.config(font=("Courier", 14))
+        new_label.pack(side="left")
         
         new_button = tk.Button(new_frame, text=collection.name, command=lambda:print("view placeholder"))
         new_button.config(height=2)
-        new_button.config(width=90)
+        new_button.config(width=75)
         new_button.config(bg="light gray")
         new_button.config(font=("Courier", 14))
         new_button.pack(side="left")
@@ -133,6 +211,7 @@ class MainWindow(tk.Frame):
         delete_button.pack(side="right")
 
         new_frame.pack(fill="x")
+        #frame.insert(frame.size()+1, new_frame)
 
         self.references[new_frame] = collection
 
@@ -146,10 +225,15 @@ class MainWindow(tk.Frame):
         del self.references[frame]
         del self.collections[index]
 
+        index = self.current_display.index(collection)
+        del self.current_display[index]
+
         f = open("collections.txt", "wb")
         for c in self.collections:
             pickle.dump(c, f)
         f.close()
+
+        
      
 
 
@@ -159,10 +243,13 @@ class MainWindow(tk.Frame):
         
         # Construct search term
         text = self.search.get().lower()
-        if ord(key.char) == 8 and len(text) >= 1:
+        if key.char == "":
+            pass
+        elif ord(key.char) == 8 and len(text) >= 1:
             text = text[0:len(text)-1]
         elif ord(key.char) != 8:
             text += key.char.lower()
+            
 
         # Display all collections that contain the search bar text
         self.collection_frame.pack_forget()
@@ -172,9 +259,12 @@ class MainWindow(tk.Frame):
         for collection in self.collections:
             if collection.name.lower().startswith(text):
                 to_display.append(collection)
-                
-        for collection in to_display:
-            self.add_collection_button(collection, self.collection_frame)
+            if str(collection.game).lower().startswith(text):
+                if collection not in to_display:
+                    to_display.append(collection)
+
+        self.current_display = to_display
+        self.change_page('x', to_display)
 
         self.collection_frame.pack()
 
