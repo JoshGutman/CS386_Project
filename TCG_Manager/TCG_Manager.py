@@ -33,6 +33,9 @@ class MainWindow(tk.Frame):
         self.cards = self.get_cards()
         self.cards_to_add = []
         self.current_collection = None
+
+        self.delete_buttons = []
+
             
 
         # This is the method that creates all the buttons, labels, etc.
@@ -150,22 +153,25 @@ class MainWindow(tk.Frame):
         name_frame.pack()
         name_label = tk.Label(name_frame, text="Name: ")
         name_label.pack(side="left")
-        name_field = tk.Entry(name_frame)
-        name_field.pack(side="right")
+        self.name_field = tk.Entry(name_frame)
+        self.name_field.pack(side="right")
 
         # Create Frame, Label, and Textfield for entering game of collection
         game_frame = tk.Frame(new_window, padx=10, pady=10)
         game_frame.pack()
         game_label = tk.Label(game_frame, text="Game: ")
         game_label.pack(side="left")
-        game_field = tk.Entry(game_frame)
-        game_field.pack(side="right")
+        self.game_field = tk.Entry(game_frame)
+        self.game_field.pack(side="right")
 
 
         # Adds creates new Collection from values in textfields, pickles it, and
         # adds it to self.collections.
         def _create_new_collection():
-            collection = Collection(name_field.get(), Game(game_field.get()))
+            collection = Collection(self.name_field.get(), Game(self.game_field.get()))
+
+            if collection.name == "" or str(collection.game) == "":
+                return
             self.collections.append(collection)
             
             self.save()
@@ -178,8 +184,8 @@ class MainWindow(tk.Frame):
         # Frame and buttons for confirming the creation of new button or canceling
         button_frame = tk.Frame(new_window, pady=10)
         button_frame.pack()
-        submit_button = tk.Button(button_frame, text="Create", width=3, padx=10, command=_create_new_collection)
-        submit_button.pack(side="right")
+        self.submit_button = tk.Button(button_frame, text="Create", width=3, padx=10, command=_create_new_collection)
+        self.submit_button.pack(side="right")
         cancel_button = tk.Button(button_frame, text="Cancel", width=4, padx=10, command=lambda: new_window.destroy())
         cancel_button.pack(side="left")
         
@@ -212,8 +218,9 @@ class MainWindow(tk.Frame):
         delete_button.config(bg="light gray")
         delete_button.pack(side="right")
 
+        self.delete_buttons.append(delete_button)
+
         new_frame.pack(fill="x")
-        #frame.insert(frame.size()+1, new_frame)
 
         self.references[new_frame] = collection
 
@@ -288,8 +295,8 @@ class MainWindow(tk.Frame):
         title.pack(side="left")
 
         # Add card button
-        add_card_button = tk.Button(top_bar, height=2, text="Add card", padx=5, command=lambda x=collection: self.add_cards(x))
-        add_card_button.pack(side="right")
+        self.add_card_button = tk.Button(top_bar, height=2, text="Add card", padx=5, command=lambda x=collection: self.add_cards(x))
+        self.add_card_button.pack(side="right")
 
 
         self.card_frame = tk.Frame(self.collection_window, pady=5)
@@ -312,6 +319,7 @@ class MainWindow(tk.Frame):
 
 
     def display_cards(self, to_add, adding):
+        self.displayed_buttons = []
         self.card_frame.pack_forget()
         self.card_frame.destroy()
         self.card_frame = tk.Frame(self.collection_window, pady=5)
@@ -324,9 +332,14 @@ class MainWindow(tk.Frame):
                 break
             frame = tk.Frame(self.card_frame)
             frame.grid(row=r, column=c)
-            button = tk.Button(frame, image=card.image, width=100, height=160, padx=2)
+            button = tk.Button(frame, width=100, height=160, padx=2)
+            try:
+                button.config(image=card.image)
+            except:
+                pass
             button.config(command=lambda x=adding, y=card, z=button: self.card_interact(x,y,z))
             button.pack()
+            self.displayed_buttons.append(button)
             label = tk.Label(frame, text=card.name, font=("Courier", 10), width=11, height=1, pady=3)
             label.pack()
             
@@ -392,14 +405,17 @@ class MainWindow(tk.Frame):
         image = tk.Label(frame, image=card.image_large)
         image.pack()
 
-        remove_button = tk.Button(frame, text="Remove card", height=3, command=lambda x=card, y=self.current_collection: self.remove_card(x,y))
-        remove_button.pack(fill="both")
+        self.remove_button = tk.Button(frame, text="Remove card", height=3, command=lambda x=card, y=self.current_collection: self.remove_card(x,y))
+        self.remove_button.pack(fill="both")
 
 
     def remove_card(self, card, collection):
         i = self.current_collection.cards.index(card)
         del self.current_collection.cards[i]
-        self.zoom.destroy()
+        try:
+            self.zoom.destroy()
+        except:
+            pass
         self.display_cards(self.current_collection.cards, False)
             
 
